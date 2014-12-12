@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5iB-DN-304">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--GUIPlayerView-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rm3-Hh-FJd">
+                                <rect key="frame" x="187" y="510" width="227" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXA-jD-g65">
+                                        <rect key="frame" x="123" y="20" width="104" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Remove Player">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="removePlayer:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gBU-vI-U4n"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwn-5c-fbu">
+                                        <rect key="frame" x="8" y="20" width="75" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Add Player">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPlayer:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="O5P-0W-1tc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="DGW-hD-M2O"/>
+                                    <constraint firstAttribute="width" constant="227" id="VMA-CJ-VDT"/>
+                                </constraints>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlD-NS-Ste">
+                                <rect key="frame" x="195" y="304" width="208.5" height="31"/>
+                                <string key="text">© copyright 2008, Blender Foundation
+www.bigbuckbunny.org</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Rm3-Hh-FJd" secondAttribute="bottom" constant="20" id="79u-zE-Zpo"/>
+                            <constraint firstAttribute="centerX" secondItem="hlD-NS-Ste" secondAttribute="centerX" id="ASB-Jk-F1j"/>
+                            <constraint firstAttribute="centerX" secondItem="Rm3-Hh-FJd" secondAttribute="centerX" id="s2n-DQ-LPU"/>
+                            <constraint firstItem="hlD-NS-Ste" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="240" id="xdy-3X-vy5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="GUIPlayerView" id="dI1-YF-Zpg"/>
+                    <connections>
+                        <outlet property="addPlayerButton" destination="nwn-5c-fbu" id="ylQ-bS-oWP"/>
+                        <outlet property="copyrightLabel" destination="hlD-NS-Ste" id="3zA-KD-x3o"/>
+                        <outlet property="removePlayerButton" destination="SXA-jD-g65" id="ftT-U5-VNq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1119" y="387"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vk9-Hl-RUJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5iB-DN-304" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6cT-RX-YcU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Hv1-uN-0UV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rph-9J-rJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="421" y="387"/>
+        </scene>
+    </scenes>
+</document>
