@@ -1,9 +1,9 @@
 # GUIPlayerView
 `GUIPlayerView` implements a simple video player using `AVPlayer`.
 
-<img src="portrait.png" alt="Portrait screenshot" style="height:300px">
+<img src="portrait.png" alt="Portrait screenshot" style="height:150px">
 
-<img src="landscape.png" alt="Landscape screenshot" style="width:300px">
+<img src="landscape.png" alt="Landscape screenshot" style="width:200px">
 
 ## Features
 * Stream online and local files
