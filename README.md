@@ -14,7 +14,7 @@
 ## Installation
 **CocoaPods** (recommended)  
 Add the following line to your `Podfile`:  
-`pod 'GUIPlayerView', '~> 0.0.1'`  
+`pod 'GUIPlayerView', '~> 0.0.2'`  
 And then add `#import <GUIPlayerView.h>` to your view controller.
 
 **Manual**  
