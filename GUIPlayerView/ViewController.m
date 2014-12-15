@@ -76,4 +76,9 @@
   [removePlayerButton setEnabled:NO];
 }
 
+- (void)playerFailedToPlayToEnd {
+  NSLog(@"Error: could not play video");
+  [playerView clean];
+}
+
 @end

@@ -333,7 +333,7 @@
 - (void)refreshProgressIndicator {
   CGFloat duration = CMTimeGetSeconds(currentItem.asset.duration);
   
-  if (duration == 0) {
+  if (duration == 0 || isnan(duration)) {
     // Video is a live stream
     [currentTimeLabel setText:nil];
     [remainingTimeLabel setText:nil];
@@ -402,6 +402,7 @@
   [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
   
   [player addObserver:self forKeyPath:@"rate" options:0 context:nil];
+  [currentItem addObserver:self forKeyPath:@"status" options:0 context:nil];
   
   [player seekToTime:kCMTimeZero];
   [player setRate:0.0f];
@@ -485,6 +486,14 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+  if ([keyPath isEqualToString:@"status"]) {
+    if (currentItem.status == AVPlayerItemStatusFailed) {
+      if ([delegate respondsToSelector:@selector(playerFailedToPlayToEnd)]) {
+        [delegate playerFailedToPlayToEnd];
+      }
+    }
+  }
+  
   if ([keyPath isEqualToString:@"rate"]) {
     CGFloat rate = [player rate];
     if (rate > 0) {
