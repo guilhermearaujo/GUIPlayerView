@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
 
   s.name          = "GUIPlayerView"
-  s.version       = "0.0.2"
+  s.version       = "0.0.3"
   s.summary       = "GUIPlayerView is a simple video player embedded into a UIView."
   s.homepage      = "https://github.com/guilhermearaujo/GUIPlayerView"
   s.license       = { :type => "MIT", :file => "LICENSE" }
   s.author        = { "Guilherme Araújo" => "guilhermeama@gmail.com" }
   s.platform      = :ios, "7.0"
-  s.source        = { :git => "https://github.com/guilhermearaujo/GUIPlayerView.git", :tag => "0.0.2" }
+  s.source        = { :git => "https://github.com/guilhermearaujo/GUIPlayerView.git", :tag => "0.0.3" }
   s.source_files  = "GUIPlayerView/Classes", "GUIPlayerView/Classes/**/*.{h,m}"
   s.exclude_files = "GUIPlayerView/Classes/Exclude"
   s.resources     = "GUIPlayerView/Resources/*.png"

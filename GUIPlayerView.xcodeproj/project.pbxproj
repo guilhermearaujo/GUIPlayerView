@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792DFFCE1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 792DFFCD1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m */; };
 		798A74631A3B269D00C611E8 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A74601A3B269D00C611E8 /* GUIPlayerView.m */; };
 		798A74641A3B269D00C611E8 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A74621A3B269D00C611E8 /* GUISlider.m */; };
 		798A74721A3B57CD00C611E8 /* gui_expand@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74661A3B57CD00C611E8 /* gui_expand@1x.png */; };
@@ -27,11 +28,12 @@
 		79B9DF0F1A37642100EA2C0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79B9DF0D1A37642100EA2C0F /* Main.storyboard */; };
 		79B9DF111A37642100EA2C0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B9DF101A37642100EA2C0F /* Images.xcassets */; };
 		79B9DF141A37642100EA2C0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B9DF121A37642100EA2C0F /* LaunchScreen.xib */; };
-		79B9DF2D1A3764ED00EA2C0F /* BigBuckBunny.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 79B9DF2C1A37646000EA2C0F /* BigBuckBunny.mp4 */; };
 		79B9DF2F1A3764F400EA2C0F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B9DF2E1A3764F400EA2C0F /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		792DFFCC1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UpdateAutoLayoutConstraints.h"; sourceTree = "<group>"; };
+		792DFFCD1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UpdateAutoLayoutConstraints.m"; sourceTree = "<group>"; };
 		798A745F1A3B269D00C611E8 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = "<group>"; };
 		798A74601A3B269D00C611E8 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = "<group>"; };
 		798A74611A3B269D00C611E8 /* GUISlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUISlider.h; sourceTree = "<group>"; };
@@ -58,7 +60,6 @@
 		79B9DF0E1A37642100EA2C0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79B9DF101A37642100EA2C0F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79B9DF131A37642100EA2C0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		79B9DF2C1A37646000EA2C0F /* BigBuckBunny.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BigBuckBunny.mp4; sourceTree = "<group>"; };
 		79B9DF2E1A3764F400EA2C0F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -81,6 +82,8 @@
 				798A74601A3B269D00C611E8 /* GUIPlayerView.m */,
 				798A74611A3B269D00C611E8 /* GUISlider.h */,
 				798A74621A3B269D00C611E8 /* GUISlider.m */,
+				792DFFCC1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.h */,
+				792DFFCD1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -132,7 +135,6 @@
 				798A74651A3B57CD00C611E8 /* Resources */,
 				79B9DF0D1A37642100EA2C0F /* Main.storyboard */,
 				79B9DF121A37642100EA2C0F /* LaunchScreen.xib */,
-				79B9DF2C1A37646000EA2C0F /* BigBuckBunny.mp4 */,
 				79B9DF101A37642100EA2C0F /* Images.xcassets */,
 				79B9DF031A37642100EA2C0F /* Supporting Files */,
 			);
@@ -206,7 +208,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				798A747B1A3B57CD00C611E8 /* gui_shrink@1x.png in Resources */,
-				79B9DF2D1A3764ED00EA2C0F /* BigBuckBunny.mp4 in Resources */,
 				79B9DF0F1A37642100EA2C0F /* Main.storyboard in Resources */,
 				798A74791A3B57CD00C611E8 /* gui_play@2x.png in Resources */,
 				798A74771A3B57CD00C611E8 /* gui_pause@3x.png in Resources */,
@@ -234,6 +235,7 @@
 				79B9DF0C1A37642100EA2C0F /* ViewController.m in Sources */,
 				79B9DF091A37642100EA2C0F /* AppDelegate.m in Sources */,
 				798A74641A3B269D00C611E8 /* GUISlider.m in Sources */,
+				792DFFCE1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m in Sources */,
 				79B9DF061A37642100EA2C0F /* main.m in Sources */,
 				798A74631A3B269D00C611E8 /* GUIPlayerView.m in Sources */,
 			);

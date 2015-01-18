@@ -31,14 +31,13 @@
 
 - (IBAction)addPlayer:(UIButton *)sender {
   [copyrightLabel setHidden:NO];
-  playerView = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0, 64, 320, 180)];
+  CGFloat width = [UIScreen mainScreen].bounds.size.width;
+  playerView = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0, 64, width, width * 9.0f / 16.0f)];
   [playerView setDelegate:self];
 
   [[self view] addSubview:playerView];
   
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"BigBuckBunny" ofType:@"mp4"];
-  NSURL *URL = [[NSURL alloc] initFileURLWithPath:path];
-
+  NSURL *URL = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];
   [playerView setVideoURL:URL];
   [playerView prepareAndPlayAutomatically:YES];
   

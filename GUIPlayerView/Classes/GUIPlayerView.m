@@ -10,6 +10,9 @@
 #import "GUISlider.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+#import "UIView+UpdateAutoLayoutConstraints.h"
 
 @interface GUIPlayerView () <AVAssetResourceLoaderDelegate, NSURLConnectionDataDelegate>
 
@@ -18,13 +21,18 @@
 @property (strong, nonatomic) AVPlayerItem *currentItem;
 
 @property (strong, nonatomic) UIView *controllersView;
+@property (strong, nonatomic) UILabel *airPlayLabel;
 
 @property (strong, nonatomic) UIButton *playButton;
 @property (strong, nonatomic) UIButton *fullscreenButton;
+@property (strong, nonatomic) MPVolumeView *volumeView;
+@property (strong, nonatomic) NSLayoutConstraint *volumeViewWidth;
 @property (strong, nonatomic) GUISlider *progressIndicator;
 @property (strong, nonatomic) UILabel *currentTimeLabel;
 @property (strong, nonatomic) UILabel *remainingTimeLabel;
 @property (strong, nonatomic) UILabel *liveLabel;
+
+@property (strong, nonatomic) UIView *spacerView;
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSTimer *progressTimer;
@@ -38,8 +46,8 @@
 @implementation GUIPlayerView
 
 @synthesize player, playerLayer, currentItem;
-@synthesize controllersView;
-@synthesize playButton, fullscreenButton, progressIndicator, currentTimeLabel, remainingTimeLabel, liveLabel;
+@synthesize controllersView, airPlayLabel;
+@synthesize playButton, fullscreenButton, volumeView, volumeViewWidth, progressIndicator, currentTimeLabel, remainingTimeLabel, liveLabel, spacerView;
 @synthesize activityIndicator, progressTimer, controllersTimer, seeking, fullscreen, defaultFrame;
 
 @synthesize videoURL, controllersTimeoutPeriod, delegate;
@@ -70,6 +78,12 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStalled:)
                                                name:AVPlayerItemPlaybackStalledNotification object:nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(airPlayAvailabilityChanged:)
+                                               name:MPVolumeViewWirelessRoutesAvailableDidChangeNotification object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(airPlayActivityChanged:)
+                                               name:MPVolumeViewWirelessRouteActiveDidChangeNotification object:nil];
+  
   [self setBackgroundColor:[UIColor blackColor]];
   
   NSArray *horizontalConstraints;
@@ -96,6 +110,31 @@
   [self addConstraints:verticalConstraints];
   
   
+  /** AirPlay View ****************************************************************************************************/
+  
+  airPlayLabel = [UILabel new];
+  [airPlayLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+  [airPlayLabel setText:@"AirPlay is enabled"];
+  [airPlayLabel setTextColor:[UIColor lightGrayColor]];
+  [airPlayLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:13.0f]];
+  [airPlayLabel setTextAlignment:NSTextAlignmentCenter];
+  [airPlayLabel setNumberOfLines:0];
+  [airPlayLabel setHidden:YES];
+  
+  [self addSubview:airPlayLabel];
+  
+  horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[AP]|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{@"AP" : airPlayLabel}];
+  
+  verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[AP]-40-|"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:@{@"AP" : airPlayLabel}];
+  [self addConstraints:horizontalConstraints];
+  [self addConstraints:verticalConstraints];
+  
   /** UI Controllers **************************************************************************************************/
   playButton = [UIButton buttonWithType:UIButtonTypeCustom];
   [playButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -106,6 +145,12 @@
   [fullscreenButton setTranslatesAutoresizingMaskIntoConstraints:NO];
   [fullscreenButton setImage:[UIImage imageNamed:@"gui_expand"] forState:UIControlStateNormal];
   [fullscreenButton setImage:[UIImage imageNamed:@"gui_shrink"] forState:UIControlStateSelected];
+  
+  volumeView = [MPVolumeView new];
+  [volumeView setTranslatesAutoresizingMaskIntoConstraints:NO];
+  [volumeView setShowsRouteButton:YES];
+  [volumeView setShowsVolumeSlider:NO];
+  [volumeView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
   
   currentTimeLabel = [UILabel new];
   [currentTimeLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -131,24 +176,42 @@
   [liveLabel setText:@"Live"];
   [liveLabel setHidden:YES];
   
+  spacerView = [UIView new];
+  [spacerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+  
   [controllersView addSubview:playButton];
+  [controllersView addSubview:fullscreenButton];
+  [controllersView addSubview:volumeView];
   [controllersView addSubview:currentTimeLabel];
   [controllersView addSubview:progressIndicator];
   [controllersView addSubview:remainingTimeLabel];
-  [controllersView addSubview:fullscreenButton];
   [controllersView addSubview:liveLabel];
+  [controllersView addSubview:spacerView];
   
   horizontalConstraints = [NSLayoutConstraint
-                           constraintsWithVisualFormat:@"H:|[P(40)][C]-5-[I]-5-[R][F(40)]|"
+                           constraintsWithVisualFormat:@"H:|[P(40)][S(10)][C]-5-[I]-5-[R][V][F(40)]|"
                            options:0
                            metrics:nil
                            views:@{@"P" : playButton,
+                                   @"S" : spacerView,
                                    @"C" : currentTimeLabel,
                                    @"I" : progressIndicator,
                                    @"R" : remainingTimeLabel,
+                                   @"V" : volumeView,
                                    @"F" : fullscreenButton}];
   
   [controllersView addConstraints:horizontalConstraints];
+  
+  volumeViewWidth = [NSLayoutConstraint constraintWithItem:volumeView
+                                                 attribute:NSLayoutAttributeWidth
+                                                 relatedBy:NSLayoutRelationEqual
+                                                    toItem:nil
+                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                multiplier:1.0f
+                                                  constant:0.0f];
+  
+  [controllersView addConstraint:volumeViewWidth];
+  [spacerView hideByWidth:YES];
   
   horizontalConstraints = [NSLayoutConstraint
                            constraintsWithVisualFormat:@"H:|-5-[L]-5-|"
@@ -209,6 +272,10 @@
 
 - (void)setLiveStreamText:(NSString *)text {
   [liveLabel setText:text];
+}
+
+- (void)setAirPlayText:(NSString *)text {
+  [airPlayLabel setText:text];
 }
 
 #pragma mark - Actions
@@ -369,11 +436,14 @@
     [controllersView setAlpha:1.0f];
   } completion:^(BOOL finished) {
     [controllersTimer invalidate];
-    controllersTimer = [NSTimer scheduledTimerWithTimeInterval:controllersTimeoutPeriod
-                                                        target:self
-                                                      selector:@selector(hideControllers)
-                                                      userInfo:nil
-                                                       repeats:NO];
+    
+    if (controllersTimeoutPeriod > 0) {
+      controllersTimer = [NSTimer scheduledTimerWithTimeInterval:controllersTimeoutPeriod
+                                                          target:self
+                                                        selector:@selector(hideControllers)
+                                                        userInfo:nil
+                                                         repeats:NO];
+    }
   }];
 }
 
@@ -388,6 +458,7 @@
 - (void)prepareAndPlayAutomatically:(BOOL)playAutomatically {
   currentItem = [AVPlayerItem playerItemWithURL:videoURL];
   player = [AVPlayer playerWithPlayerItem:currentItem];
+  [player setAllowsExternalPlayback:YES];
   playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
   [self.layer addSublayer:playerLayer];
   
@@ -414,6 +485,13 @@
 }
 
 - (void)clean {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:MPVolumeViewWirelessRoutesAvailableDidChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:MPVolumeViewWirelessRouteActiveDidChangeNotification object:nil];
+  
+  [player setAllowsExternalPlayback:NO];
   [self stop];
   [player removeObserver:self forKeyPath:@"rate"];
   [self setPlayer:nil];
@@ -457,7 +535,7 @@
 
 #pragma mark - AV Player Notifications and Observers
 
-- (void)playerDidFinishPlaying:(NSNotification *) notification {
+- (void)playerDidFinishPlaying:(NSNotification *)notification {
   [self stop];
   
   if (fullscreen) {
@@ -483,6 +561,49 @@
   if ([delegate respondsToSelector:@selector(playerStalled)]) {
     [delegate playerStalled];
   }
+}
+
+
+- (void)airPlayAvailabilityChanged:(NSNotification *)notification {
+  [UIView animateWithDuration:0.4f
+                   animations:^{
+                     if ([volumeView areWirelessRoutesAvailable]) {
+                       [volumeViewWidth setConstant:40.0f];
+                     } else if (! [volumeView isWirelessRouteActive]) {
+                       [volumeViewWidth setConstant:0.0f];
+                     }
+                     [self layoutIfNeeded];
+                   }];
+}
+
+
+- (void)airPlayActivityChanged:(NSNotification *)notification {
+  [UIView animateWithDuration:0.4f
+                   animations:^{
+                     if ([volumeView isWirelessRouteActive]) {
+                       if (fullscreen)
+                         [self toggleFullscreen:fullscreenButton];
+                       
+                       [playButton hideByWidth:YES];
+                       [fullscreenButton hideByWidth:YES];
+                       [spacerView hideByWidth:NO];
+                       
+                       [airPlayLabel setHidden:NO];
+                       
+                       controllersTimeoutPeriod = 0;
+                       [self showControllers];
+                     } else {
+                       [playButton hideByWidth:NO];
+                       [fullscreenButton hideByWidth:NO];
+                       [spacerView hideByWidth:YES];
+                       
+                       [airPlayLabel setHidden:YES];
+                       
+                       controllersTimeoutPeriod = 3;
+                       [self showControllers];
+                     }
+                     [self layoutIfNeeded];
+                   }];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

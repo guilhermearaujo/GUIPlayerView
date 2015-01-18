@@ -44,4 +44,6 @@
 
 - (void)setLiveStreamText:(NSString *)text;
 
+- (void)setAirPlayText:(NSString *)text;
+
 @end

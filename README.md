@@ -10,11 +10,12 @@
 * Progress bar also shows the buffer load progress
 * Customizable progress bar tint colors
 * Automatically detect whether the stream is a fixed-length or undefined (as in a live stream) and adjusts the UI accordingly
+* AirPlay integration
 
 ## Installation
 **CocoaPods** (recommended)  
 Add the following line to your `Podfile`:  
-`pod 'GUIPlayerView', '~> 0.0.2'`  
+`pod 'GUIPlayerView', '~> 0.0.3'`  
 And then add `#import <GUIPlayerView.h>` to your view controller.
 
 **Manual**  
@@ -43,6 +44,7 @@ When the tint color is set, the buffer tint color will automatically be set to a
 - (void)setTintColor:(UIColor *)tintColor;
 - (void)setBufferTintColor:(UIColor *)tintColor;
 - (void)setLiveStreamText:(NSString *)text;
+- (void)setAirPlayText:(NSString *)text;
 ```
 ### Delegate Methods
 There are several optional delegate methods you can use:
