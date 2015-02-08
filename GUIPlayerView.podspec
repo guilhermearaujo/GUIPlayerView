@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name          = "GUIPlayerView"
-  s.version       = "0.0.3"
+  s.version       = "0.0.4"
   s.summary       = "GUIPlayerView is a simple video player embedded into a UIView."
   s.homepage      = "https://github.com/guilhermearaujo/GUIPlayerView"
   s.license       = { :type => "MIT", :file => "LICENSE" }
