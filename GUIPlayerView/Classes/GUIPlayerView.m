@@ -26,7 +26,6 @@
 @property (strong, nonatomic) UIButton *playButton;
 @property (strong, nonatomic) UIButton *fullscreenButton;
 @property (strong, nonatomic) MPVolumeView *volumeView;
-@property (strong, nonatomic) NSLayoutConstraint *volumeViewWidth;
 @property (strong, nonatomic) GUISlider *progressIndicator;
 @property (strong, nonatomic) UILabel *currentTimeLabel;
 @property (strong, nonatomic) UILabel *remainingTimeLabel;
@@ -47,7 +46,7 @@
 
 @synthesize player, playerLayer, currentItem;
 @synthesize controllersView, airPlayLabel;
-@synthesize playButton, fullscreenButton, volumeView, volumeViewWidth, progressIndicator, currentTimeLabel, remainingTimeLabel, liveLabel, spacerView;
+@synthesize playButton, fullscreenButton, volumeView, progressIndicator, currentTimeLabel, remainingTimeLabel, liveLabel, spacerView;
 @synthesize activityIndicator, progressTimer, controllersTimer, seeking, fullscreen, defaultFrame;
 
 @synthesize videoURL, controllersTimeoutPeriod, delegate;
@@ -141,16 +140,16 @@
   [playButton setImage:[UIImage imageNamed:@"gui_play"] forState:UIControlStateNormal];
   [playButton setImage:[UIImage imageNamed:@"gui_pause"] forState:UIControlStateSelected];
   
-  fullscreenButton = [UIButton buttonWithType:UIButtonTypeCustom];
-  [fullscreenButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-  [fullscreenButton setImage:[UIImage imageNamed:@"gui_expand"] forState:UIControlStateNormal];
-  [fullscreenButton setImage:[UIImage imageNamed:@"gui_shrink"] forState:UIControlStateSelected];
-  
   volumeView = [MPVolumeView new];
   [volumeView setTranslatesAutoresizingMaskIntoConstraints:NO];
   [volumeView setShowsRouteButton:YES];
   [volumeView setShowsVolumeSlider:NO];
   [volumeView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+  
+  fullscreenButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  [fullscreenButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+  [fullscreenButton setImage:[UIImage imageNamed:@"gui_expand"] forState:UIControlStateNormal];
+  [fullscreenButton setImage:[UIImage imageNamed:@"gui_shrink"] forState:UIControlStateSelected];
   
   currentTimeLabel = [UILabel new];
   [currentTimeLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -189,7 +188,7 @@
   [controllersView addSubview:spacerView];
   
   horizontalConstraints = [NSLayoutConstraint
-                           constraintsWithVisualFormat:@"H:|[P(40)][S(10)][C]-5-[I]-5-[R][V][F(40)]|"
+                           constraintsWithVisualFormat:@"H:|[P(40)][S(10)][C]-5-[I]-5-[R][F(40)][V(40)]|"
                            options:0
                            metrics:nil
                            views:@{@"P" : playButton,
@@ -202,15 +201,7 @@
   
   [controllersView addConstraints:horizontalConstraints];
   
-  volumeViewWidth = [NSLayoutConstraint constraintWithItem:volumeView
-                                                 attribute:NSLayoutAttributeWidth
-                                                 relatedBy:NSLayoutRelationEqual
-                                                    toItem:nil
-                                                 attribute:NSLayoutAttributeNotAnAttribute
-                                                multiplier:1.0f
-                                                  constant:0.0f];
-  
-  [controllersView addConstraint:volumeViewWidth];
+  [volumeView hideByWidth:YES];
   [spacerView hideByWidth:YES];
   
   horizontalConstraints = [NSLayoutConstraint
@@ -456,8 +447,22 @@
 #pragma mark - Public Methods
 
 - (void)prepareAndPlayAutomatically:(BOOL)playAutomatically {
-  currentItem = [AVPlayerItem playerItemWithURL:videoURL];
-  player = [AVPlayer playerWithPlayerItem:currentItem];
+  player = [[AVPlayer alloc] initWithPlayerItem:nil];
+  
+  AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+  NSArray *keys = [NSArray arrayWithObject:@"playable"];
+  
+  [asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
+    currentItem = [AVPlayerItem playerItemWithAsset:asset];
+    [player replaceCurrentItemWithPlayerItem:currentItem];
+    
+    if (playAutomatically) {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        [self play];
+      });
+    }
+  }];
+  
   [player setAllowsExternalPlayback:YES];
   playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
   [self.layer addSublayer:playerLayer];
@@ -477,9 +482,9 @@
   
   [player seekToTime:kCMTimeZero];
   [player setRate:0.0f];
+  [playButton setSelected:YES];
   
   if (playAutomatically) {
-    [self play];
     [activityIndicator startAnimating];
   }
 }
@@ -568,9 +573,9 @@
   [UIView animateWithDuration:0.4f
                    animations:^{
                      if ([volumeView areWirelessRoutesAvailable]) {
-                       [volumeViewWidth setConstant:40.0f];
+                       [volumeView hideByWidth:NO];
                      } else if (! [volumeView isWirelessRouteActive]) {
-                       [volumeViewWidth setConstant:0.0f];
+                       [volumeView hideByWidth:YES];
                      }
                      [self layoutIfNeeded];
                    }];
