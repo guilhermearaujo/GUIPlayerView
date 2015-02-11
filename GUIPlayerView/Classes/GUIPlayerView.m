@@ -447,6 +447,10 @@
 #pragma mark - Public Methods
 
 - (void)prepareAndPlayAutomatically:(BOOL)playAutomatically {
+  if (player) {
+    [self stop];
+  }
+  
   player = [[AVPlayer alloc] initWithPlayerItem:nil];
   
   AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
