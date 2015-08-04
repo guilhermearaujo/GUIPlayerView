@@ -456,13 +456,14 @@
   AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
   NSArray *keys = [NSArray arrayWithObject:@"playable"];
   
+    __weak typeof(self) weakSelf = self;
   [asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
-    currentItem = [AVPlayerItem playerItemWithAsset:asset];
-    [player replaceCurrentItemWithPlayerItem:currentItem];
+    weakSelf.currentItem = [AVPlayerItem playerItemWithAsset:asset];
+    [weakSelf.player replaceCurrentItemWithPlayerItem:weakSelf.currentItem];
     
     if (playAutomatically) {
       dispatch_sync(dispatch_get_main_queue(), ^{
-        [self play];
+        [weakSelf play];
       });
     }
   }];
@@ -494,6 +495,12 @@
 }
 
 - (void)clean {
+    
+  [progressTimer invalidate];
+  progressTimer = nil;
+  [controllersTimer invalidate];
+  controllersTimer = nil;
+
   [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
@@ -504,6 +511,7 @@
   [self stop];
   [player removeObserver:self forKeyPath:@"rate"];
   [self setPlayer:nil];
+  [self.playerLayer removeFromSuperlayer];
   [self setPlayerLayer:nil];
   [self removeFromSuperview];
 }
@@ -630,6 +638,10 @@
       [activityIndicator stopAnimating];
     }
   }
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc");
 }
 
 @end
