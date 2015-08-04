@@ -49,6 +49,7 @@
   [copyrightLabel setHidden:YES];
   
   [playerView clean];
+  playerView = nil;
   
   [addPlayerButton setEnabled:YES];
   [removePlayerButton setEnabled:NO];
