@@ -537,6 +537,10 @@
   }
 }
 
+- (void)toggleFullscreen {
+  [self toggleFullscreen:fullscreenButton];
+}
+
 - (void)stop {
   if (player) {
     [player pause];
