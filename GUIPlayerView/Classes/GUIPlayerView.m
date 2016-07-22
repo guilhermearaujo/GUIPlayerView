@@ -410,6 +410,7 @@
     // Set time labels
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:(duration >= 3600 ? @"hh:mm:ss": @"mm:ss")];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     
     NSDate *currentTime = [NSDate dateWithTimeIntervalSince1970:current];
     NSDate *remainingTime = [NSDate dateWithTimeIntervalSince1970:(duration - current)];
