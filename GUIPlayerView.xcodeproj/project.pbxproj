@@ -10,18 +10,6 @@
 		792DFFCE1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 792DFFCD1A6BDD0900AA0606 /* UIView+UpdateAutoLayoutConstraints.m */; };
 		798A74631A3B269D00C611E8 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A74601A3B269D00C611E8 /* GUIPlayerView.m */; };
 		798A74641A3B269D00C611E8 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A74621A3B269D00C611E8 /* GUISlider.m */; };
-		798A74721A3B57CD00C611E8 /* gui_expand@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74661A3B57CD00C611E8 /* gui_expand@1x.png */; };
-		798A74731A3B57CD00C611E8 /* gui_expand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74671A3B57CD00C611E8 /* gui_expand@2x.png */; };
-		798A74741A3B57CD00C611E8 /* gui_expand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74681A3B57CD00C611E8 /* gui_expand@3x.png */; };
-		798A74751A3B57CD00C611E8 /* gui_pause@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74691A3B57CD00C611E8 /* gui_pause@1x.png */; };
-		798A74761A3B57CD00C611E8 /* gui_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A746A1A3B57CD00C611E8 /* gui_pause@2x.png */; };
-		798A74771A3B57CD00C611E8 /* gui_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A746B1A3B57CD00C611E8 /* gui_pause@3x.png */; };
-		798A74781A3B57CD00C611E8 /* gui_play@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A746C1A3B57CD00C611E8 /* gui_play@1x.png */; };
-		798A74791A3B57CD00C611E8 /* gui_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A746D1A3B57CD00C611E8 /* gui_play@2x.png */; };
-		798A747A1A3B57CD00C611E8 /* gui_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A746E1A3B57CD00C611E8 /* gui_play@3x.png */; };
-		798A747B1A3B57CD00C611E8 /* gui_shrink@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A746F1A3B57CD00C611E8 /* gui_shrink@1x.png */; };
-		798A747C1A3B57CD00C611E8 /* gui_shrink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74701A3B57CD00C611E8 /* gui_shrink@2x.png */; };
-		798A747D1A3B57CD00C611E8 /* gui_shrink@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A74711A3B57CD00C611E8 /* gui_shrink@3x.png */; };
 		79B9DF061A37642100EA2C0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9DF051A37642100EA2C0F /* main.m */; };
 		79B9DF091A37642100EA2C0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9DF081A37642100EA2C0F /* AppDelegate.m */; };
 		79B9DF0C1A37642100EA2C0F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9DF0B1A37642100EA2C0F /* ViewController.m */; };
@@ -38,18 +26,6 @@
 		798A74601A3B269D00C611E8 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = "<group>"; };
 		798A74611A3B269D00C611E8 /* GUISlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUISlider.h; sourceTree = "<group>"; };
 		798A74621A3B269D00C611E8 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = "<group>"; };
-		798A74661A3B57CD00C611E8 /* gui_expand@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_expand@1x.png"; sourceTree = "<group>"; };
-		798A74671A3B57CD00C611E8 /* gui_expand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_expand@2x.png"; sourceTree = "<group>"; };
-		798A74681A3B57CD00C611E8 /* gui_expand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_expand@3x.png"; sourceTree = "<group>"; };
-		798A74691A3B57CD00C611E8 /* gui_pause@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_pause@1x.png"; sourceTree = "<group>"; };
-		798A746A1A3B57CD00C611E8 /* gui_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_pause@2x.png"; sourceTree = "<group>"; };
-		798A746B1A3B57CD00C611E8 /* gui_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_pause@3x.png"; sourceTree = "<group>"; };
-		798A746C1A3B57CD00C611E8 /* gui_play@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_play@1x.png"; sourceTree = "<group>"; };
-		798A746D1A3B57CD00C611E8 /* gui_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_play@2x.png"; sourceTree = "<group>"; };
-		798A746E1A3B57CD00C611E8 /* gui_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_play@3x.png"; sourceTree = "<group>"; };
-		798A746F1A3B57CD00C611E8 /* gui_shrink@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_shrink@1x.png"; sourceTree = "<group>"; };
-		798A74701A3B57CD00C611E8 /* gui_shrink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_shrink@2x.png"; sourceTree = "<group>"; };
-		798A74711A3B57CD00C611E8 /* gui_shrink@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gui_shrink@3x.png"; sourceTree = "<group>"; };
 		79B9DF001A37642100EA2C0F /* GUIPlayerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GUIPlayerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79B9DF041A37642100EA2C0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79B9DF051A37642100EA2C0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,25 +64,6 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		798A74651A3B57CD00C611E8 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				798A74661A3B57CD00C611E8 /* gui_expand@1x.png */,
-				798A74671A3B57CD00C611E8 /* gui_expand@2x.png */,
-				798A74681A3B57CD00C611E8 /* gui_expand@3x.png */,
-				798A74691A3B57CD00C611E8 /* gui_pause@1x.png */,
-				798A746A1A3B57CD00C611E8 /* gui_pause@2x.png */,
-				798A746B1A3B57CD00C611E8 /* gui_pause@3x.png */,
-				798A746C1A3B57CD00C611E8 /* gui_play@1x.png */,
-				798A746D1A3B57CD00C611E8 /* gui_play@2x.png */,
-				798A746E1A3B57CD00C611E8 /* gui_play@3x.png */,
-				798A746F1A3B57CD00C611E8 /* gui_shrink@1x.png */,
-				798A74701A3B57CD00C611E8 /* gui_shrink@2x.png */,
-				798A74711A3B57CD00C611E8 /* gui_shrink@3x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		79B9DEF71A37642100EA2C0F = {
 			isa = PBXGroup;
 			children = (
@@ -132,7 +89,6 @@
 				79B9DF0A1A37642100EA2C0F /* ViewController.h */,
 				79B9DF0B1A37642100EA2C0F /* ViewController.m */,
 				798A745E1A3B269D00C611E8 /* Classes */,
-				798A74651A3B57CD00C611E8 /* Resources */,
 				79B9DF0D1A37642100EA2C0F /* Main.storyboard */,
 				79B9DF121A37642100EA2C0F /* LaunchScreen.xib */,
 				79B9DF101A37642100EA2C0F /* Images.xcassets */,
@@ -181,6 +137,7 @@
 				TargetAttributes = {
 					79B9DEFF1A37642100EA2C0F = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 4QXNTZ5ET3;
 					};
 				};
 			};
@@ -207,21 +164,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				798A747B1A3B57CD00C611E8 /* gui_shrink@1x.png in Resources */,
 				79B9DF0F1A37642100EA2C0F /* Main.storyboard in Resources */,
-				798A74791A3B57CD00C611E8 /* gui_play@2x.png in Resources */,
-				798A74771A3B57CD00C611E8 /* gui_pause@3x.png in Resources */,
 				79B9DF141A37642100EA2C0F /* LaunchScreen.xib in Resources */,
 				79B9DF111A37642100EA2C0F /* Images.xcassets in Resources */,
-				798A74781A3B57CD00C611E8 /* gui_play@1x.png in Resources */,
-				798A74761A3B57CD00C611E8 /* gui_pause@2x.png in Resources */,
-				798A747C1A3B57CD00C611E8 /* gui_shrink@2x.png in Resources */,
-				798A747D1A3B57CD00C611E8 /* gui_shrink@3x.png in Resources */,
-				798A747A1A3B57CD00C611E8 /* gui_play@3x.png in Resources */,
-				798A74731A3B57CD00C611E8 /* gui_expand@2x.png in Resources */,
-				798A74721A3B57CD00C611E8 /* gui_expand@1x.png in Resources */,
-				798A74751A3B57CD00C611E8 /* gui_pause@1x.png in Resources */,
-				798A74741A3B57CD00C611E8 /* gui_expand@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,8 +288,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4QXNTZ5ET3;
 				INFOPLIST_FILE = GUIPlayerView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = at.jpunz.GUIPlayerView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -353,8 +300,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4QXNTZ5ET3;
 				INFOPLIST_FILE = GUIPlayerView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = at.jpunz.GUIPlayerView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

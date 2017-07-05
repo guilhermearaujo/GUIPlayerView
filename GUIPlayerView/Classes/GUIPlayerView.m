@@ -60,13 +60,20 @@
   return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame showFullScreenButton:(BOOL)showFullScreenButton showAirPlayButton:(BOOL)showAirPlayButton {
+    self = [super initWithFrame:frame];
+    defaultFrame = frame;
+    [self setupWithFullScreenButton:showFullScreenButton showAirPlayButton:showAirPlayButton];
+    return self;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   [self setup];
   return self;
 }
 
-- (void)setup {
+- (void)setupWithFullScreenButton:(BOOL)showFullScreenButton showAirPlayButton:(BOOL)showAirPlayButton {
   // Set up notification observers
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerDidFinishPlaying:)
                                                name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -77,11 +84,14 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStalled:)
                                                name:AVPlayerItemPlaybackStalledNotification object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(airPlayAvailabilityChanged:)
+  if(showAirPlayButton)
+  {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(airPlayAvailabilityChanged:)
                                                name:MPVolumeViewWirelessRoutesAvailableDidChangeNotification object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(airPlayActivityChanged:)
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(airPlayActivityChanged:)
                                                name:MPVolumeViewWirelessRouteActiveDidChangeNotification object:nil];
+  }
   
   [self setBackgroundColor:[UIColor blackColor]];
   
@@ -186,6 +196,8 @@
   [controllersView addSubview:remainingTimeLabel];
   [controllersView addSubview:liveLabel];
   [controllersView addSubview:spacerView];
+    
+    if(!showFullScreenButton) [fullscreenButton hideByWidth:YES];
   
   horizontalConstraints = [NSLayoutConstraint
                            constraintsWithVisualFormat:@"H:|[P(40)][S(10)][C]-5-[I]-5-[R][F(40)][V(40)]|"
@@ -247,6 +259,10 @@
   [self showControllers];
   
   controllersTimeoutPeriod = 3;
+}
+
+- (void)setup {
+    [self setupWithFullScreenButton:true showAirPlayButton:true];
 }
 
 #pragma mark - UI Customization
