@@ -503,10 +503,10 @@
   
   [player seekToTime:kCMTimeZero];
   [player setRate:0.0f];
-  [playButton setSelected:YES];
   
   if (playAutomatically) {
     [activityIndicator startAnimating];
+    [playButton setSelected:YES];
   }
 }
 
