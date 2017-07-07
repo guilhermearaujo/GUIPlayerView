@@ -657,7 +657,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"dealloc");
+    [player removeObserver:self forKeyPath:@"rate"];
 }
 
 @end
