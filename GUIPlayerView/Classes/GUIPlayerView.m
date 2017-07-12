@@ -657,7 +657,7 @@
 }
 
 - (void)dealloc {
-    [player removeObserver:self forKeyPath:@"rate"];
+    [self clean];
 }
 
 @end
