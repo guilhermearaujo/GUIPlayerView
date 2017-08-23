@@ -39,6 +39,7 @@
 - (void)play;
 - (void)pause;
 - (void)stop;
+- (void)toggleFullscreen;
 
 - (BOOL)isPlaying;
 

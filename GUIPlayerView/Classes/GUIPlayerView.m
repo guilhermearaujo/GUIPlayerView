@@ -312,8 +312,8 @@
         responder = [responder nextResponder];
         return (UIViewController *)responder;
     }
-    
-- (void)toggleFullscreen:(UIButton *)button {
+
+- (void)toggleFullscreen {
     CMTime startTime = currentItem.currentTime;
     bool isPlaying = [self isPlaying];
     
@@ -327,6 +327,10 @@
             [controller.player play];
         }
     }];
+}
+    
+- (void)toggleFullscreen:(UIButton *)button {
+    [self toggleFullscreen];
 }
     
 - (void)seek:(UISlider *)slider {
