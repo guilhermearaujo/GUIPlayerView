@@ -314,12 +314,11 @@
     }
 
 - (void)toggleFullscreen {
-    CMTime startTime = currentItem.currentTime;
-    bool isPlaying = [self isPlaying];
-    
     AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
     controller.player = player;
     [[self parentViewController] presentViewController:controller animated:true completion:^{
+        CMTime startTime = currentItem.currentTime;
+        bool isPlaying = [self isPlaying];
         [player seekToTime:startTime];
         
         if (isPlaying)
