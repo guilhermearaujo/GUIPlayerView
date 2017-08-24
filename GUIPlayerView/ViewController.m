@@ -32,9 +32,9 @@
 - (IBAction)addPlayer:(UIButton *)sender {
   [copyrightLabel setHidden:NO];
   CGFloat width = [UIScreen mainScreen].bounds.size.width;
-  playerView = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0, 64, width, width * 9.0f / 16.0f)];
+  playerView = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0, 64, width, width * 9.0f / 16.0f) showFullScreenButton:false showAirPlayButton:false];
   [playerView setDelegate:self];
-
+    
   [[self view] addSubview:playerView];
   
   NSURL *URL = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];

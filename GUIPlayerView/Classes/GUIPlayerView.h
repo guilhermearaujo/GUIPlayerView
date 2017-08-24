@@ -32,11 +32,14 @@
 @property (assign, nonatomic) NSInteger controllersTimeoutPeriod;
 @property (weak, nonatomic) id<GUIPlayerViewDelegate> delegate;
 
+- (instancetype)initWithFrame:(CGRect)frame showFullScreenButton:(BOOL)showFullScreenButton showAirPlayButton:(BOOL)showAirPlayButton;
+
 - (void)prepareAndPlayAutomatically:(BOOL)playAutomatically;
 - (void)clean;
 - (void)play;
 - (void)pause;
 - (void)stop;
+- (void)toggleFullscreen;
 
 - (BOOL)isPlaying;
 
