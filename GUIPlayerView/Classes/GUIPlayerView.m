@@ -39,6 +39,7 @@
 @property (assign, nonatomic) BOOL seeking;
 @property (assign, nonatomic) BOOL fullscreen;
 @property (assign, nonatomic) CGRect defaultFrame;
+@property (assign, nonatomic) BOOL isControllersViewInAnimation;
 
 @end
 
@@ -243,7 +244,7 @@
   [progressIndicator addTarget:self action:@selector(resumeRefreshing) forControlEvents:UIControlEventTouchUpInside|
    UIControlEventTouchUpOutside];
   
-  [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showControllers)]];
+  [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleControllerAlpha)]];
   [self showControllers];
   
   controllersTimeoutPeriod = 3;
@@ -423,7 +424,20 @@
   }
 }
 
+- (void)toggleControllerAlpha
+{
+    if (self.isControllersViewInAnimation) {
+        return;
+    }
+    if (controllersView.alpha == 0.0) {
+        [self showControllers];
+    } else if(controllersView.alpha == 1.0) {
+        [self hideControllers];
+    }
+}
+
 - (void)showControllers {
+    self.isControllersViewInAnimation = YES;
   [UIView animateWithDuration:0.2f animations:^{
     [controllersView setAlpha:1.0f];
   } completion:^(BOOL finished) {
@@ -436,12 +450,16 @@
                                                         userInfo:nil
                                                          repeats:NO];
     }
+      self.isControllersViewInAnimation = NO;
   }];
 }
 
 - (void)hideControllers {
-  [UIView animateWithDuration:0.5f animations:^{
+    self.isControllersViewInAnimation = YES;
+  [UIView animateWithDuration:0.3f animations:^{
     [controllersView setAlpha:0.0f];
+  } completion:^(BOOL finished) {
+      self.isControllersViewInAnimation = NO;
   }];
 }
 
