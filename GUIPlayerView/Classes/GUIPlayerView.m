@@ -452,23 +452,22 @@
     [self stop];
   }
   
-  player = [[AVPlayer alloc] initWithPlayerItem:nil];
-  
   AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
   NSArray *keys = [NSArray arrayWithObject:@"playable"];
-  
-    __weak typeof(self) weakSelf = self;
+  AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithAsset:asset];
+  player = [[AVPlayer alloc] initWithPlayerItem: playerItem];
+
   [asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
-    weakSelf.currentItem = [AVPlayerItem playerItemWithAsset:asset];
-    [weakSelf.player replaceCurrentItemWithPlayerItem:weakSelf.currentItem];
-    
-    if (playAutomatically) {
-      dispatch_sync(dispatch_get_main_queue(), ^{
-        [weakSelf play];
-      });
-    }
+	  currentItem = [AVPlayerItem playerItemWithAsset:asset];
+	  [player replaceCurrentItemWithPlayerItem:currentItem];
+
+	  if (playAutomatically) {
+			dispatch_sync(dispatch_get_main_queue(), ^{
+				[self play];
+			});
+	  }
   }];
-  
+	
   [player setAllowsExternalPlayback:YES];
   playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
   [self.layer addSublayer:playerLayer];
@@ -536,6 +535,10 @@
   if ([delegate respondsToSelector:@selector(playerDidPause)]) {
     [delegate playerDidPause];
   }
+}
+
+- (void)toggleFullscreen {
+  [self toggleFullscreen:fullscreenButton];
 }
 
 - (void)stop {
